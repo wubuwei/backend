@@ -35,7 +35,7 @@ unix  2      [ ]         DGRAM                    13298
 执行命令：`awk '{print $1,$4}' netstat.txt`
 
 执行结果：
-``` 
+```
 Active (w/o
 Proto Local
 tcp VM_0_15_centos:46174
@@ -112,7 +112,7 @@ unix                 DGRAM
 ```
 
 #### 5. AWK 内建变量
-|内建变量  | 释义 
+|内建变量  | 释义
 | --- | --- |
 | $0 | 当前记录（这个变量中存放着整个行的内容） |
 | $1~$n | 当前记录的第n个字段，字段间由FS分隔 |
@@ -126,6 +126,7 @@ unix                 DGRAM
 | FILENAME | 当前输入文件的名字 |
 
 输出行号
+
 执行命令（单个文件）：`awk '$2==3 && $5=="DGRAM" || NR==1 {printf "%-20s %-20s %-20s %-20s\n", NR, FNR, $1 ,$5}' netstat.txt`
 
 执行结果：
@@ -140,4 +141,43 @@ unix                 DGRAM
 ```
 1                    1                    Active               servers)
 38                   10                   unix                 DGRAM
+```
+
+#### 6. 指定分隔符
+
+执行命令：`awk  'BEGIN{FS=":"} {print $1,$3,$6}' /etc/passwd`
+
+等价于上面命令：`awk -F: '{print $1,$3,$6}' /etc/passwd`
+
+执行结果：
+```
+root 0 /root
+bin 1 /bin
+daemon 2 /sbin
+adm 3 /var/adm
+lp 4 /var/spool/lpd
+sync 5 /sbin
+shutdown 6 /sbin
+halt 7 /sbin
+mail 8 /var/spool/mail
+operator 11 /root
+games 12 /usr/games
+ftp 14 /var/ftp
+```
+以 `\t 制表符tab` 作为分隔符输出的例子，执行命令：`awk -F: '{print $1,$3,$5}' OFS="\t" /etc/passwd`
+
+执行结果：
+```
+root	0	root
+bin	1	bin
+daemon	2	daemon
+adm	3	adm
+lp	4	lp
+sync	5	sync
+shutdown	6	shutdown
+halt	7	halt
+mail	8	mail
+operator	11	operator
+games	12	games
+ftp	14	FTP User
 ```
