@@ -1,11 +1,11 @@
-### AWK 介绍
+#### AWK 介绍
 `AWK` 是一种优良的文本处理工具，`Linux` 及 `Unix` 环境中现有的功能最强大的数据处理引擎之一。
 
 `AWK` 是一种处理文本文件的语言。它将文件作为记录序列处理。在一般情况下，文件内容的每行都是一个记录。每行内容都会被分割成一系列的域，因此，我们可以认为一行的第一个词为第一个域，第二个词为第二个，以此类推。`AWK` 程序是由一些处理特定模式的语句块构成的。AWK一次可以读取一个输入行。对每个输入行，AWK解释器会判断它是否符合程序中出现的各个模式，并执行符合的模式所对应的动作。
 
-### AWK 实战
+#### AWK 实战
 实战内容来自酷壳：https://coolshell.cn/articles/9070.html
-#### 1.  `netstat` 命令中提取了如下信息 到 `netstat.txt` 文件
+##### 1.  `netstat` 命令中提取了如下信息 到 `netstat.txt` 文件
 ```
 Active Internet connections (w/o servers)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State
@@ -28,7 +28,7 @@ unix  3      [ ]         STREAM     CONNECTED     78243738 /run/systemd/journal/
 unix  2      [ ]         DGRAM                    13298
 ```
 
-#### 2. 执行命令输入第 1 列和第 4 列
+##### 2. 执行命令输入第 1 列和第 4 列
 - 其中单引号中的被大括号括着的就是awk的语句，注意，其只能被单引号包含。
 - 其中的$1、$n表示第几例。注：$0表示整个行。
 
@@ -57,7 +57,7 @@ unix ]
 unix ]
 ```
 
-#### 3. awk的格式化输出，和C语言的printf没什么两样
+##### 3. awk的格式化输出，和C语言的printf没什么两样
 
 执行命令： `awk '{printf "%-8s,,,%-8s\n",$1,$5}' netstat.txt`
 
@@ -84,7 +84,7 @@ unix    ,,,STREAM
 unix    ,,,DGRAM
 ```
 
-#### 4. 使用运算符过滤记录
+##### 4. 使用运算符过滤记录
 执行命令： `awk '$2==3 && $5=="DGRAM"' netstat.txt`
 
 执行结果：
@@ -111,7 +111,7 @@ Active               servers)
 unix                 DGRAM
 ```
 
-#### 5. AWK 内建变量
+##### 5. AWK 内建变量
 |内建变量  | 释义
 | --- | --- |
 | $0 | 当前记录（这个变量中存放着整个行的内容） |
@@ -143,7 +143,7 @@ unix                 DGRAM
 38                   10                   unix                 DGRAM
 ```
 
-#### 6. 指定分隔符
+##### 6. 指定分隔符
 
 执行命令：`awk  'BEGIN{FS=":"} {print $1,$3,$6}' /etc/passwd`
 
