@@ -19,6 +19,7 @@
 实战内容来自：
 - 酷壳：https://coolshell.cn/articles/9070.html
 - 阮一峰：http://www.ruanyifeng.com/blog/2018/11/awk.html
+
 ##### 1.  `netstat` 命令中提取了如下信息 到 `netstat.txt` 文件
 ```
 Active Internet connections (w/o servers)
