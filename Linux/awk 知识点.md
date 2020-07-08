@@ -20,7 +20,8 @@
 - 酷壳：https://coolshell.cn/articles/9070.html
 - 阮一峰：http://www.ruanyifeng.com/blog/2018/11/awk.html
 
-##### 1.  `netstat` 命令中提取了如下信息 到 `netstat.txt` 文件
+##### 1. 提取操作文本
+`netstat` 命令中提取了如下信息 到 `netstat.txt` 文件
 ```
 Active Internet connections (w/o servers)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State
@@ -43,7 +44,9 @@ unix  3      [ ]         STREAM     CONNECTED     78243738 /run/systemd/journal/
 unix  2      [ ]         DGRAM                    13298
 ```
 
-##### 2. 执行命令输入第 `1` 列和第 `4` 列
+##### 2. 输出指定列
+ 执行命令输出第 `1` 列和第 `4` 列
+
 - 其中单引号中的被大括号括着的就是awk的语句，注意，其只能被单引号包含。
 - 其中的$1、$n表示第几例。注：$0表示整个行。
 
@@ -163,7 +166,9 @@ unix                 DGRAM
 执行命令：`awk  'BEGIN{FS=":"} {print $1,$3,$6}' /etc/passwd`
 
 等价于上面命令：`awk -F: '{print $1,$3,$6}' /etc/passwd`
+
 命令描述：以 `-F` 后面的 `:` 作为分隔符
+
 执行结果：
 ```
 root 0 /root
@@ -179,7 +184,7 @@ operator 11 /root
 games 12 /usr/games
 ftp 14 /var/ftp
 ```
-以 `\t 制表符tab` 作为分隔符输出的例子，执行命令：`awk -F: '{print $1,$3,$5}' OFS="\t" /etc/passwd`
+执行命令，以 `\t 制表符tab` 作为分隔符输出的例子：`awk -F: '{print $1,$3,$5}' OFS="\t" /etc/passwd`
 
 执行结果：
 ```
@@ -200,7 +205,9 @@ ftp	14	FTP User
 ##### 7. 字符串匹配
 
 执行命令：`awk '$6 ~ /ESTA/ || NR==1 {print NR,$4,$5,$6}' OFS="\t" netstat.txt`
+
 命令解释：`~` 表示模式开始。`/ /` 中是模式。这就是一个正则表达式的匹配。
+
 执行结果：
 ```
 1	(w/o	servers)
@@ -213,8 +220,11 @@ ftp	14	FTP User
 
 
 执行命令：`awk '$6 !~ /ESTA/ || NR==1 {print NR,$4,$5,$6}' OFS="\t" netstat.txt`
+
 命令解释：`!` 表示模式取反
+
 或者执行命令：`awk '!/ESTA/ {print NR,$4,$5,$6}' OFS="\t" netstat.txt`
+
 执行结果：
 ```
 1	(w/o	servers)
@@ -236,22 +246,30 @@ ftp	14	FTP User
 ##### 8. 折分文件
 
 命令介绍：按第 `6` 例分隔文件，第 `6` 列一样的将被打印在一个文件中，文件名是这列的值
+
 执行命令：`awk '$6 !~ /ESTA/ || NR==1 {print NR,$4,$5,$6}' OFS="\t" netstat.txt`
+
 命令解释：`NR!=1` 表示不处理表头
+
 执行结果：`awk 'NR!=1{print > $6}' netstat.txt`
 
 命令介绍：将 `4`、`5` 列输出到第 `6` 列值为文件名的文件中
+
 执行命令：`awk 'NR!=1{print $4,$5 > $6}' netstat.txt`
 
 
 ##### 9. 统计文件
 
 命令介绍：计算所有的 `txt` 文件，`log` 文件和 `c` 文件的文件大小总和
+
 执行命令：`ls -l *.txt *.c *.log | awk '{sum+=$5} END {print sum}'`
+
 命令解释：`ls -l` 展示的第 `5` 列表示文件大小
 
 命令介绍：统计用户的进程的占了多少内存（加起来的是 `ps aux` 展示的 `RSS` 列）
+
 执行命令：`ps aux | awk 'NR!=1{a[$1]+=$6;} END { for(i in a) print i ", " a[i]"KB";}'`
+
 执行结果：
 ```
 sshd, 2208KB
@@ -310,7 +328,9 @@ END {
 }
 ```
 执行命令：`awk -f cal.awk score.txt`
+
 命令描述：`-f` 表示从脚本文件中读取 `awk` 命令。
+
 执行结果：
 ```
 NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL
@@ -328,7 +348,9 @@ AVERAGE:     63.80    78.60    70.00
 ##### 11. 内置函数
 
 执行命令：`awk '{print toupper($7)}' netstat.txt`
+
 命令描述：将第 `7` 列置为大写展示
+
 执行结果：
 ```
 ADDRESS
@@ -362,7 +384,9 @@ PATH
 ##### 12. `if` 语句
 
 执行命令：`awk -F: '{if ($3>6) print $0; else print "-------"}' /etc/passwd`
+
 命令描述：paswd 文件内以 `:` 分隔，若第 3 列大于 6 展示整行，否则打印`-------`
+
 执行结果：
 ```
 -------
@@ -399,6 +423,7 @@ named:x:25:25:Named:/var/named:/sbin/nologin
 ```
 
 ##### 13. 几个花活
+
 ```
 #从文件中找出长度大于80的行
 awk 'length>80' netstat.txt
