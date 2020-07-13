@@ -190,7 +190,7 @@ select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx
 - 在业务功能测试阶段要求输出所有的 `general_log`，分析日志行为提前发现问题；
 - 如果使用的是 `MySQL 5.6` 或者更新版本，把 `innodb_undo_tablespaces` 设置成 `2`（或更大的值）。如果真的出现大事务导致回滚段过大，这样设置后清理起来更方便。
 
-## 3. 索引
+## 4. 索引
 
 索引的出现其实就是为了提高数据查询的效率，就像书的目录一样。
 
@@ -289,7 +289,7 @@ index (k))engine=InnoDB;
 
 ![索引下推执行流程](https://raw.githubusercontent.com/wubuwei/backend_image/master/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8.png)
 
-## 4. MySQL 的锁
+## 5. MySQL 的锁
 
 数据库锁设计的初衷是处理并发问题。作为多用户共享的资源，当出现并发访问的时候，数据库需要合理地控制资源的访问规则。而锁就是用来实现这些访问规则的重要数据结构。
 
