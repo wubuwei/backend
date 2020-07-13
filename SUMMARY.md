@@ -16,6 +16,7 @@
   * [awk 知识点](Linux/awk 知识点.md)
   * [vim 知识点](Linux/vim 知识点.md)
 - My SQL
+  * [MySQL 问答系列](MySQL/MySQL 问答系列.md)
   * [MySQL 知识点](MySQL/MySQL 知识点.md)
   * [MySQL 自问自答](MySQL/MySQL 自问自答.md)
 - Network

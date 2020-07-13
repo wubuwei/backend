@@ -70,6 +70,8 @@
 
 `innodb_flush_log_at_trx_commit` 这个参数设置成 `1` 的时候，表示每次事务的 `redo log` 都直接持久化到磁盘。可以保证 `MySQL` 异常重启之后数据不丢失。
 
+写 `redo log` 也是写 `IO`，同样耗费性能。 但 `redo log` 是顺序写，不用去“找位置”，而更新数据需要找位置；并且可以组提交，还有别的一些优化，收益最大是是这两个因素。
+
 ### binlog
 
 `MySQL` 的 `Server` 层日志，称为 `binlog`。
