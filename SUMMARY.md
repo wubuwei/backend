@@ -2,6 +2,7 @@
 
 - Algorithm
   * [复杂度分析](Algorithm/复杂度分析.md)
+  * [算法](Algorithm/算法.md)
 - Data Structure
   * [数据结构](DataStructure/数据结构.md)
 - Design Mode
