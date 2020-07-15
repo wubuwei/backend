@@ -5,3 +5,5 @@ nginx
 
 ### 3. Go 和 PHP 在运行的时候有什么区别和优势？
 https://learnku.com/articles/44432
+
+IOC（依赖注入）和 AOP（面向切面）机制，
