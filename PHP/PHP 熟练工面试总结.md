@@ -9,7 +9,7 @@
 - `MVC` 各部分作用
 - 面向对象是啥，`PHP` 如何实现多继承
 - `abstract` 与 `interface` 异同点
-- 用户发送一个请求到 `PHP-FPM` 的整体流程、`master` 与 `work` 进程，设置的三种模式，`master` 起到的具体作用
+- 用户发送一个请求到 `PHP-FPM` 的整体流程，`master` 与 `work` 进程区别设置的三种模式，`master` 在其中起到哪些作用
 - 懂 `Laravel`? 那 `IOC`、`DI`、静态绑定(`static`) 、自动加载(`autoload`、`require`、`include`)
 
 ##### 想牛逼点？来
