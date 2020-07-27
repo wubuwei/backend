@@ -87,3 +87,31 @@ self 只能引用当前类中的方法，而 static 关键字允许函数能够�
 `include` 引入文件的时候，如果碰到错误，会给出提示，并继续运行下边的代码。
 
 `require` 引入文件的时候，如果碰到错误，会给出提示，并停止运行下边的代码。
+
+### 6. session 和 cookie 的联系和区别
+
+#### 区别：
+
+- 1.存放位置：Session保存在服务器，Cookie保存在客户端。
+
+- 2.存放的形式：Session是以对象的形式保存在服务器，Cookie以字符串的形式保存在客户端。
+
+- 3.用途：Cookies适合做保存用户的个人设置,爱好等,Session适合做客户的身份验证
+
+- 4.路径：Session不能区分路径，同一个用户在访问一个网站期间，所有的Session在任何一个地方都可以访问到。而Cookie中如果设置了路径参数，那么同一个网站中不同路径下的Cookie互相是访问不到的。
+
+- 5.安全性：Cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗，考虑到安全应当使用session
+
+- 6.大小以及数量限制:每个域名所煲含的cookie 数:IE7/8,FireFox:50个, Opera30个； Cookie总大小：Firefox和Safari允许cookie多达4097个字节，Opera允许cookie多达4096个字 节，InternetExplorer允许cookie多达4095个字节；一般认为Session没有大小和数量限制。
+
+#### 联系：
+
+- 1.Session需要借助Cookie才能正常工作。如果客户端完全禁止Cookie，Session将失效！因为Session是由应用服务器维持的一个 服务器端的存储空间，用户在连接服务器时，会由服务器生成一个唯一的SessionID,用该SessionID 为标识符来存取服务器端的Session存储空间。而SessionID这一数据则是保存到客户端，用Cookie保存的，用户提交页面时，会将这一 SessionID 提交到服务器端，来存取Session数据。这一过程，是不用开发人员干预的。所以一旦客户端禁用Cookie，那么Session也会失效。
+
+#### 如何修改SESSION的生存时间
+
+- 1.设置浏览器保存的sessionid失效时间 setcookie(session_name(), session_id(), time() + $lifeTime, "/");
+
+- 2.可以使用SESSION 自带的 session_set_cookie_params(86400); 来设置 Session 的生存期
+
+- 3.通过修改php.ini中的session.gc_maxlifetime参数的值就可以改变session的生存时间
